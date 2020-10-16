@@ -6,7 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static java.util.Collections.emptyList;
+import static codingdojo.SampleModelObjects.*;
+import static java.util.Collections.*;
 
 public class XMLExporterTest {
 
@@ -23,6 +24,16 @@ public class XMLExporterTest {
     @Test
     public void exportFull_ZeroOrders() {
         String result = XMLExporter.exportFull(emptyList());
+
+        Approvals.verifyXml(result);
+    }
+
+    @Test
+    public void exportFull_OrderWithNoEventProduct() {
+        Product productWithNoEvent = CherryBloom;
+        Order order = new Order("1234", Util.fromIsoDate("2018-09-01T00:00Z"),
+                FlagshipStore, new Product[]{productWithNoEvent});
+        String result = XMLExporter.exportFull(singletonList(order));
 
         Approvals.verifyXml(result);
     }
