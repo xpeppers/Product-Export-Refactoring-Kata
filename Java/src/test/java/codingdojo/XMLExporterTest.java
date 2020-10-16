@@ -15,7 +15,6 @@ public class XMLExporterTest {
 
         String result = XMLExporter.exportFull(orderList);
 
-        Approvals.verify(result);
+        Approvals.verifyXml(result);
     }
-
 }
